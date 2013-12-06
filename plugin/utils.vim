@@ -2,11 +2,15 @@ fun! OpenInNewTab(fname, ... )
     " let l:cWinPos = winnr()
     let l:totalWins = winnr('$')
     let l:tabOffset = 0
+    let l:currentTabNo = tabpagenr()
     if l:totalWins == 1
         let l:tabOffset=1
     end
     execute 'close'
-    if  exists('a:1') 
+    if  exists('a:1')
+        if a:1 < l:currentTabNo
+            let l:tabOffset = 0
+        end
         execute 'tabn'.(a:1-l:tabOffset)
         execute 'vs '.a:fname
     else
