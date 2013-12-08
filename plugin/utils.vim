@@ -6,12 +6,17 @@ fun! OpenInNewTab(fname, ... )
     if l:totalWins == 1
         let l:tabOffset=1
     end
-    execute 'close'
     if  exists('a:1')
         if a:1 < l:currentTabNo
             let l:tabOffset = 0
-        end
-        execute 'tabn'.(a:1-l:tabOffset)
+        endif
+        let l:targetTabNo = ( a:1-l:tabOffset )
+        echo l:targetTabNo
+        if l:targetTabNo < 1
+            return
+        endif
+        execute 'close'
+        execute 'tabn'.( l:targetTabNo)
         execute 'vs '.a:fname
     else
         execute 'tabedit ' . a:fname
