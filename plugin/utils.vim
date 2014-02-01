@@ -60,3 +60,4 @@ endfunction
 nmap <C-W>t :call OpenInNewTab(@%)<CR>
 command! -nargs=? Mt call OpenInNewTabI(<args>)
 command! OpenSnippets call OpenSnippets()
+command! Cd cd %:p:h
