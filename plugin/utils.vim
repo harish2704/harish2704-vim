@@ -15,9 +15,12 @@ fun! OpenInNewTab(fname, ... )
         if l:targetTabNo < 1
             return
         endif
+
+        let save_cursor = getcurpos()
         execute 'close'
         execute 'tabn'.( l:targetTabNo)
         execute 'vs '.a:fname
+        call setpos('.', save_cursor)
     else
         execute 'tabedit ' . a:fname
     end
@@ -51,7 +54,7 @@ endfunction
 
 fun! OpenSnippets()
     let l:ftypes = split( &filetype , '\.')
-    let l:prefix = '~/.vim/bundle/vim-snippets/snippets/'
+    let l:prefix = '~/.nvim/bundle/vim-snippets/snippets/'
     let l:suffix = '.snippets'
     execute 'tabnew'
     call SpList( l:ftypes, l:prefix, l:suffix )
@@ -60,4 +63,3 @@ endfunction
 nmap <C-W>t :call OpenInNewTab(@%)<CR>
 command! -nargs=? Mt call OpenInNewTabI(<args>)
 command! OpenSnippets call OpenSnippets()
-command! Cd cd %:p:h
