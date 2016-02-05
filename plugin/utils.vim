@@ -1,3 +1,4 @@
+let s:bundlePath = expand('<sfile>:p:h' . '/../' );
 fun! OpenInNewTab(fname, ... )
     " let l:cWinPos = winnr()
     let l:totalWins = winnr('$')
@@ -15,9 +16,12 @@ fun! OpenInNewTab(fname, ... )
         if l:targetTabNo < 1
             return
         endif
+
+        let save_cursor = getcurpos()
         execute 'close'
         execute 'tabn'.( l:targetTabNo)
         execute 'vs '.a:fname
+        call setpos('.', save_cursor)
     else
         execute 'tabedit ' . a:fname
     end
@@ -51,7 +55,8 @@ endfunction
 
 fun! OpenSnippets()
     let l:ftypes = split( &filetype , '\.')
-    let l:prefix = '~/.vim/bundle/vim-snippets/snippets/'
+
+    let l:prefix = s:bundlePath .'/vim-snippets/snippets/'
     let l:suffix = '.snippets'
     execute 'tabnew'
     call SpList( l:ftypes, l:prefix, l:suffix )
