@@ -57,6 +57,7 @@ fun! OpenSnippets()
     let l:ftypes = split( &filetype , '\.')
 
     let l:prefix = s:bundlePath .'/vim-snippets/snippets/'
+
     let l:suffix = '.snippets'
     execute 'tabnew'
     call SpList( l:ftypes, l:prefix, l:suffix )
