@@ -1,4 +1,4 @@
-let s:bundlePath = expand('<sfile>:p:h' . '/../' );
+let s:bundlePath = resolve( expand('<sfile>:p:h' ) . '/../../' )
 fun! OpenInNewTab(fname, ... )
     " let l:cWinPos = winnr()
     let l:totalWins = winnr('$')
