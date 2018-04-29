@@ -1,4 +1,6 @@
 let s:bundlePath = resolve( expand('<sfile>:p:h' ) . '/../../' )
+
+" Popout current split window to a new tab by saving curor position
 fun! OpenInNewTab(fname, ... )
     " let l:cWinPos = winnr()
     let l:totalWins = winnr('$')
@@ -27,6 +29,7 @@ fun! OpenInNewTab(fname, ... )
     end
 endfunction
 
+" Open current window in n'th tab after current tab
 fun! OpenInNewTabI( ... )
     if  exists('a:1')
         let l:targetTab = a:1
@@ -63,6 +66,9 @@ fun! OpenSnippets()
     call SpList( l:ftypes, l:prefix, l:suffix )
 endfunction
 
+" Open current window in new tab
 nmap <C-W>t :call OpenInNewTab(@%)<CR>
+" Move current window to n'th tab
 command! -nargs=? Mt call OpenInNewTabI(<args>)
+" Open all snippet files for current filetype
 command! OpenSnippets call OpenSnippets()
